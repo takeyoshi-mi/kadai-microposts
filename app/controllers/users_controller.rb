@@ -39,6 +39,18 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
+  def favings
+    @user = User.find(params[:id])
+    @favings = @user.favings.page(params[:page])
+    counts(@user)
+  end
+  
+  def faveds
+    @user = User.find(params[:id])
+    @faveds = @user.faveds.page(params[:page])
+    counts(@user)
+  end
+  
   def feed_microposts
     Micropost.where(user_id: self.following_ids + [self.id])
   end

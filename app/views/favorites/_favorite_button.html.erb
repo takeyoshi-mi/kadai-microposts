@@ -1,13 +1,11 @@
-<% unless current_user == user %>
-  <% if current_user.faving?(user) %>
+  <% if current_user.favings?(user) %>
     <%= form_for(current_user.favorites.find_by(fav_id: user.id), html: { method: :delete }) do |f| %>
       <%= hidden_field_tag :fav_id, user.id %>
-      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
+      <%= f.submit 'Unfav', class: 'btn btn-danger btn-block' %>
     <% end %>
   <% else %>
     <%= form_for(current_user.favorites.build) do |f| %>
       <%= hidden_field_tag :fav_id, user.id %>
-      <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
+      <%= f.submit 'Fav', class: 'btn btn-primary btn-block' %>
     <% end %>
   <% end %>
-<% end %>
