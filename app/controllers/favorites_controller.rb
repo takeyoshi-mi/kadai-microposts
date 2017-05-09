@@ -14,4 +14,6 @@ class FavoritesController < ApplicationController
     flash[:success] = 'micropostのお気に入りを解除しました。'
     redirect_to user_path(current_user)
   end
+
+  
 end
