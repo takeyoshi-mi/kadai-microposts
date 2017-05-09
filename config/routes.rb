@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'relationships/create'
-
-  get 'relationships/destroy'
 
   root to: 'toppages#index'
 
@@ -15,7 +12,6 @@ Rails.application.routes.draw do
       get :followings
       get :followers
       get :favings
-      get :faveds
     end
   end
 

@@ -15,8 +15,6 @@ class User < ApplicationRecord
   
   has_many :favorites
   has_many :favings, through: :favorites, source: :fav
-  has_many :reverses_of_favorite, class_name: 'Favorite', foreign_key: 'fav_id'
-  has_many :faveds, through: :reverses_of_favorite, source: :user
 
   def follow(other_user)
     unless self == other_user
@@ -33,18 +31,16 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
   
-  def fav(other_user)
-    unless self == other_user
-      self.favorites.find_or_create_by(fav_id: other_user.id)
-    end
+  def fav(micropost)
+    self.favorites.find_or_create_by(fav_id: micropost.id)
   end
 
-  def unfav(other_user)
-    favorite = self.favorites.find_by(fav_id: other_user.id)
+  def unfav(micropost)
+    favorite = self.favorites.find_by(fav_id: micropost.id)
     favorite.destroy if favorite
   end
 
-  def faving?(other_user)
-    self.favings.include?(other_user)
+  def faving?(micropost)
+    self.favings.include?(micropost)
   end
 end
